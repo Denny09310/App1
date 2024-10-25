@@ -1,0 +1,40 @@
+@using MauiIcons.Material
+@inject INavigation Navigation
+
+<SwipeView>
+    <LeftItems>
+        <SwipeItems>
+            <SwipeItem BackgroundColor="@(liked ? Colors.CornflowerBlue : Colors.White)"
+                       Text="Like"
+                       OnInvoked="HandleInvokedLike" />
+        </SwipeItems>
+    </LeftItems>
+    <ChildContent>
+        <StackLayout BackgroundColor="Colors.White" OnTap="NavigateToDetailsAsync">
+            <Label StyleClass="heading-1">@Post.Title</Label>
+            <Label>@Post.Body</Label>
+            <StackLayout Orientation="StackOrientation.Horizontal" Spacing="15">
+                <MauiIcon Icon="MaterialIcons.ThumbUp" IconSuffix="@($"{Post.Reactions.Likes}")" />
+                <MauiIcon Icon="MaterialIcons.ThumbDown" IconSuffix="@($"{Post.Reactions.Dislikes}")" />
+            </StackLayout>
+        </StackLayout>
+    </ChildContent>
+</SwipeView>
+
+@code
+{
+    [Parameter] public Post Post { get; set; } = default!;
+
+    private bool liked;
+
+    private Task NavigateToDetailsAsync()
+    {
+        return Navigation.NavigateToAsync($"/details/{Post.Id}");
+    }
+
+    private void HandleInvokedLike()
+    {
+        Post.Reactions.Likes += liked ? -1 : 1;
+        liked = !liked;
+    }
+}

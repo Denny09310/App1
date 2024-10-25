@@ -1,0 +1,73 @@
+﻿@page "/"
+@inject IDummyClient Dummy
+
+<ContentPage OnLoaded="LoadMorePostsAsync">
+    @if (error != null)
+    {
+        <Label TextColor="Colors.Red">@error</Label>
+    }
+    else if (posts != null)
+    {
+        <RefreshView IsRefreshing="@refreshing" OnRefreshing="HandleRefresingAsync">
+            <CollectionView ItemsSource="@posts"
+                            RemainingItemsThreshold="5"
+                            OnRemainingItemsThresholdReached="LoadMorePostsAsync">
+                <ItemTemplate>
+                    <PostView Post="context" />
+                </ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    }
+    else
+    {
+        <ActivityIndicator VerticalOptions="LayoutOptions.Center" IsRunning="true" />
+    }
+</ContentPage>
+
+@code
+{
+    private List<Post>? posts;
+    private bool refreshing;
+    private string? error;
+    private int skip;
+
+    private async Task LoadMorePostsAsync()
+    {
+        try
+        {
+            using var response = await Dummy.GetPostsAsync(limit: 15, skip);
+
+            if (response.IsSuccessStatusCode)
+            {
+                posts ??= new List<Post>();
+                posts.AddRange(response.Content.Posts);
+                skip += 15;
+            }
+            else
+            {
+                error = response.Error.Message ?? "Error loading posts.";
+            }
+        }
+        catch (Exception ex)
+        {
+            error = $"Unexpected error: {ex.Message}";
+        }
+    }
+
+    private async Task HandleRefresingAsync()
+    {
+        refreshing = true;
+        skip = 0;
+
+        posts?.Clear();
+
+        try
+        {
+            await LoadMorePostsAsync();
+        }
+        finally
+        {
+            refreshing = false;
+        }
+    }
+}

@@ -1,0 +1,11 @@
+@page "/details/{Id:int}"
+
+<ContentPage>
+    <Label>@Id</Label>
+</ContentPage>
+
+@code
+{
+    [Parameter]
+    public int Id { get; set; }
+}
