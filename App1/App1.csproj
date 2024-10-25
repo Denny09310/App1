@@ -24,7 +24,7 @@
 		<ApplicationTitle>App1</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.app2</ApplicationId>
+		<ApplicationId>com.companyname.app1</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -36,22 +36,15 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<AndroidSigningKeyStore>Platforms\Android\app1.keystore</AndroidSigningKeyStore>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
-	  <AndroidKeyStore>True</AndroidKeyStore>
-	  <AndroidSigningStorePass>passwd</AndroidSigningStorePass>
-	  <AndroidSigningKeyAlias>app1</AndroidSigningKeyAlias>
-	  <AndroidSigningKeyPass>passwd</AndroidSigningKeyPass>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
-	  <AndroidKeyStore>True</AndroidKeyStore>
-	  <AndroidSigningStorePass>passwd</AndroidSigningStorePass>
-	  <AndroidSigningKeyAlias>app1</AndroidSigningKeyAlias>
-	  <AndroidSigningKeyPass>passwd</AndroidSigningKeyPass>
+		<AndroidSigningKeyStore>Platforms\Android\app1.keystore</AndroidSigningKeyStore>
+		<AndroidSigningStorePass>passwd</AndroidSigningStorePass>
+		<AndroidPackageFormat>apk</AndroidPackageFormat>
+		<AndroidKeyStore>True</AndroidKeyStore>
+		<AndroidSigningKeyAlias>app1</AndroidSigningKeyAlias>
+		<AndroidSigningKeyPass>passwd</AndroidSigningKeyPass>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -83,9 +76,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Platforms\Windows\App.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<TrimmerRootDescriptor Include="Roots.xml" />
 	</ItemGroup>
 
 </Project>
