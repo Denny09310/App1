@@ -8,7 +8,7 @@
 using BlazorBindings.Core;
 using BlazorBindings.Maui.Elements;
 using MC = Microsoft.Maui.Controls;
-using MIC = MauiIcons.Core;
+using MC1 = MauiIcons.Core;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Maui.Graphics;
 using System;
@@ -26,7 +26,7 @@ namespace BlazorBindings.Maui.Elements.MauiIcons.Core
         }
 
         [Parameter] public uint? EntranceAnimationDuration { get; set; }
-        [Parameter] public MIC.AnimationType? EntranceAnimationType { get; set; }
+        [Parameter] public MC1.AnimationType? EntranceAnimationType { get; set; }
         [Parameter] public Enum Icon { get; set; }
         [Parameter] public Color IconAndSuffixBackgroundColor { get; set; }
         [Parameter] public bool? IconAutoScaling { get; set; }
@@ -40,13 +40,13 @@ namespace BlazorBindings.Maui.Elements.MauiIcons.Core
         [Parameter] public double? IconSuffixFontSize { get; set; }
         [Parameter] public Color IconSuffixTextColor { get; set; }
         [Parameter] public uint? OnClickAnimationDuration { get; set; }
-        [Parameter] public MIC.AnimationType? OnClickAnimationType { get; set; }
+        [Parameter] public MC1.AnimationType? OnClickAnimationType { get; set; }
         [Parameter] public string OnIdioms { get; set; }
         [Parameter] public string OnPlatforms { get; set; }
 
-        public new MIC.MauiIcon NativeControl => (MIC.MauiIcon)((BindableObject)this).NativeControl;
+        public new MC1.MauiIcon NativeControl => (MC1.MauiIcon)((BindableObject)this).NativeControl;
 
-        protected override MIC.MauiIcon CreateNativeElement() => new();
+        protected override MC1.MauiIcon CreateNativeElement() => new();
 
         protected override void HandleParameter(string name, object value)
         {
@@ -56,14 +56,14 @@ namespace BlazorBindings.Maui.Elements.MauiIcons.Core
                     if (!Equals(EntranceAnimationDuration, value))
                     {
                         EntranceAnimationDuration = (uint?)value;
-                        NativeControl.EntranceAnimationDuration = EntranceAnimationDuration ?? (uint)MIC.MauiIcon.EntranceAnimationDurationProperty.DefaultValue;
+                        NativeControl.EntranceAnimationDuration = EntranceAnimationDuration ?? (uint)MC1.MauiIcon.EntranceAnimationDurationProperty.DefaultValue;
                     }
                     break;
                 case nameof(EntranceAnimationType):
                     if (!Equals(EntranceAnimationType, value))
                     {
-                        EntranceAnimationType = (MIC.AnimationType?)value;
-                        NativeControl.EntranceAnimationType = EntranceAnimationType ?? (MIC.AnimationType)MIC.MauiIcon.EntranceAnimationTypeProperty.DefaultValue;
+                        EntranceAnimationType = (MC1.AnimationType?)value;
+                        NativeControl.EntranceAnimationType = EntranceAnimationType ?? (MC1.AnimationType)MC1.MauiIcon.EntranceAnimationTypeProperty.DefaultValue;
                     }
                     break;
                 case nameof(Icon):
@@ -84,7 +84,7 @@ namespace BlazorBindings.Maui.Elements.MauiIcons.Core
                     if (!Equals(IconAutoScaling, value))
                     {
                         IconAutoScaling = (bool?)value;
-                        NativeControl.IconAutoScaling = IconAutoScaling ?? (bool)MIC.MauiIcon.IconAutoScalingProperty.DefaultValue;
+                        NativeControl.IconAutoScaling = IconAutoScaling ?? (bool)MC1.MauiIcon.IconAutoScalingProperty.DefaultValue;
                     }
                     break;
                 case nameof(IconBackgroundColor):
@@ -105,7 +105,7 @@ namespace BlazorBindings.Maui.Elements.MauiIcons.Core
                     if (!Equals(IconSize, value))
                     {
                         IconSize = (double?)value;
-                        NativeControl.IconSize = IconSize ?? (double)MIC.MauiIcon.IconSizeProperty.DefaultValue;
+                        NativeControl.IconSize = IconSize ?? (double)MC1.MauiIcon.IconSizeProperty.DefaultValue;
                     }
                     break;
                 case nameof(IconSuffix):
@@ -119,7 +119,7 @@ namespace BlazorBindings.Maui.Elements.MauiIcons.Core
                     if (!Equals(IconSuffixAutoScaling, value))
                     {
                         IconSuffixAutoScaling = (bool?)value;
-                        NativeControl.IconSuffixAutoScaling = IconSuffixAutoScaling ?? (bool)MIC.MauiIcon.IconSuffixAutoScalingProperty.DefaultValue;
+                        NativeControl.IconSuffixAutoScaling = IconSuffixAutoScaling ?? (bool)MC1.MauiIcon.IconSuffixAutoScalingProperty.DefaultValue;
                     }
                     break;
                 case nameof(IconSuffixBackgroundColor):
@@ -140,7 +140,7 @@ namespace BlazorBindings.Maui.Elements.MauiIcons.Core
                     if (!Equals(IconSuffixFontSize, value))
                     {
                         IconSuffixFontSize = (double?)value;
-                        NativeControl.IconSuffixFontSize = IconSuffixFontSize ?? (double)MIC.MauiIcon.IconSuffixFontSizeProperty.DefaultValue;
+                        NativeControl.IconSuffixFontSize = IconSuffixFontSize ?? (double)MC1.MauiIcon.IconSuffixFontSizeProperty.DefaultValue;
                     }
                     break;
                 case nameof(IconSuffixTextColor):
@@ -154,14 +154,14 @@ namespace BlazorBindings.Maui.Elements.MauiIcons.Core
                     if (!Equals(OnClickAnimationDuration, value))
                     {
                         OnClickAnimationDuration = (uint?)value;
-                        NativeControl.OnClickAnimationDuration = OnClickAnimationDuration ?? (uint)MIC.MauiIcon.OnClickAnimationDurationProperty.DefaultValue;
+                        NativeControl.OnClickAnimationDuration = OnClickAnimationDuration ?? (uint)MC1.MauiIcon.OnClickAnimationDurationProperty.DefaultValue;
                     }
                     break;
                 case nameof(OnClickAnimationType):
                     if (!Equals(OnClickAnimationType, value))
                     {
-                        OnClickAnimationType = (MIC.AnimationType?)value;
-                        NativeControl.OnClickAnimationType = OnClickAnimationType ?? (MIC.AnimationType)MIC.MauiIcon.OnClickAnimationTypeProperty.DefaultValue;
+                        OnClickAnimationType = (MC1.AnimationType?)value;
+                        NativeControl.OnClickAnimationType = OnClickAnimationType ?? (MC1.AnimationType)MC1.MauiIcon.OnClickAnimationTypeProperty.DefaultValue;
                     }
                     break;
                 case nameof(OnIdioms):
