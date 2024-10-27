@@ -1,40 +1,69 @@
-@using MauiIcons.Material
-@inject INavigation Navigation
+@inject IDummyClient Dummy
 
-<SwipeView>
-    <LeftItems>
-        <SwipeItems>
-            <SwipeItem BackgroundColor="@(liked ? Colors.CornflowerBlue : Colors.White)"
-                       Text="Like"
-                       OnInvoked="HandleInvokedLike" />
-        </SwipeItems>
-    </LeftItems>
-    <ChildContent>
-        <StackLayout BackgroundColor="Colors.White" OnTap="NavigateToDetailsAsync">
-            <Label StyleClass="heading-1">@Post.Title</Label>
+<ContentView OnLoaded="HandleLoadedAsync">
+    @if (user != null)
+    {
+        <StackLayout Padding="16" Spacing="15">
+
+            <FlexLayout Direction="FlexDirection.Row"
+                        HorizontalOptions="LayoutOptions.Fill"
+                        AlignItems="FlexAlignItems.Center"
+                        JustifyContent="FlexJustify.SpaceBetween">
+
+                <StackLayout Orientation="StackOrientation.Horizontal" Spacing="15">
+
+                    <Border HeightRequest="48" WidthRequest="48" StrokeColor="Colors.Transparent">
+                        <StrokeShape>
+                            <RoundRectangle CornerRadius="new(80, 80, 80, 80)" />
+                        </StrokeShape>
+
+                        <ChildContent>
+                            <Image Aspect="Aspect.AspectFit"
+                                   Source="@ImageSource.FromUri(new Uri(user.Image))"
+                                   HeightRequest="48"
+                                   WidthRequest="48"
+                                   VerticalOptions="LayoutOptions.Center"
+                                   HorizontalOptions="LayoutOptions.Center" />
+                        </ChildContent>
+                    </Border>
+
+                    <Label FontSize="16" Opacity="0.5" VerticalOptions="LayoutOptions.Center">@user.Username</Label>
+                </StackLayout>
+
+                <MauiIcon Icon="@MaterialIcons.MoreVert" OnClickAnimationType="AnimationType.Fade" />
+            </FlexLayout>
+
+            <Label FontSize="20" FontAttributes="FontAttributes.Bold">@Post.Title</Label>
             <Label>@Post.Body</Label>
-            <StackLayout Orientation="StackOrientation.Horizontal" Spacing="15">
-                <MauiIcon Icon="MaterialIcons.ThumbUp" IconSuffix="@($"{Post.Reactions.Likes}")" />
-                <MauiIcon Icon="MaterialIcons.ThumbDown" IconSuffix="@($"{Post.Reactions.Dislikes}")" />
+
+            <StackLayout Orientation="StackOrientation.Horizontal" Spacing="25">
+                <MauiIcon Icon="@MaterialIcons.ThumbUp"
+                          IconSize="18"
+                          IconSuffixFontSize="18"
+                          IconSuffix="@($"{Post.Reactions.Likes}")" />
+
+                <MauiIcon Icon="@MaterialIcons.ThumbDown"
+                          IconSize="18"
+                          IconSuffixFontSize="18"
+                          IconSuffix="@($"{Post.Reactions.Dislikes}")" />
             </StackLayout>
         </StackLayout>
-    </ChildContent>
-</SwipeView>
+    }
+</ContentView>
 
 @code
 {
     [Parameter] public Post Post { get; set; } = default!;
 
-    private bool liked;
+    private User? user;
 
-    private Task NavigateToDetailsAsync()
+    private async Task HandleLoadedAsync()
     {
-        return Navigation.NavigateToAsync($"/details/{Post.Id}");
-    }
+        using var response = await Dummy.GetUserAsync(Post.UserId);
 
-    private void HandleInvokedLike()
-    {
-        Post.Reactions.Likes += liked ? -1 : 1;
-        liked = !liked;
+        if (response.IsSuccessStatusCode)
+        {
+            user = response.Content;
+        }
     }
 }
