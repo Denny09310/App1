@@ -1,6 +1,6 @@
-﻿using MauiIcons.Core.Base;
+﻿using App1.Extensions;
+using MauiIcons.Core.Base;
 using MauiIcons.Material;
-using MC = Microsoft.Maui.Controls;
 
 namespace BlazorBindings.Maui.Elements;
 
@@ -31,16 +31,10 @@ public partial class MoreOptionsBottomSheet
         Icon = MaterialIcons.Report,
     };
 
-    private static readonly ResourceDictionary Resources = new()
+    private static readonly ResourceDictionary Resources = [];
+
+    static MoreOptionsBottomSheet()
     {
-        new Style(typeof(MC.Button))
-        {
-            Setters =
-            {
-                new Setter { Property = MC.View.HorizontalOptionsProperty, Value = LayoutOptions.Start },
-                new Setter { Property = MC.VisualElement.BackgroundColorProperty, Value = Colors.Transparent },
-                new Setter { Property = MC.Button.TextColorProperty, Value = Colors.Black },
-            }
-        }
-    };
+        Resources.Scoped("Elements/BottomSheet/MoreOptionsBottomSheet.razor.xaml");
+    }
 }
