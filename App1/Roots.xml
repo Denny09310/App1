@@ -1,3 +1,0 @@
-﻿<linker>
-	<assembly fullname="Microsoft.AspNetCore.Components" preserve="all" />
-</linker>

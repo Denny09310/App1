@@ -8,7 +8,7 @@
     }
     else if (posts != null)
     {
-        <RefreshView IsRefreshing="@refreshing" OnRefreshing="HandleRefresingAsync">
+        <RefreshView IsRefreshing="@refreshing" OnRefreshing="HandleRefreshingAsync">
             <CollectionView ItemsSource="@posts"
                             RemainingItemsThreshold="5"
                             OnRemainingItemsThresholdReached="LoadMorePostsAsync">
@@ -54,7 +54,7 @@
         }
     }
 
-    private async Task HandleRefresingAsync()
+    private async Task HandleRefreshingAsync()
     {
         refreshing = true;
         skip = 0;

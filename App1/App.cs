@@ -8,7 +8,7 @@ internal partial class App(IServiceProvider services) : BlazorBindingsApplicatio
     protected override void Configure()
     {
         var resources = typeof(App).Assembly.GetCustomAttributes<XamlResourceIdAttribute>()
-            .Where(attribute => Path.GetDirectoryName(attribute.Path) == "Resources/Styles" && Path.GetExtension(attribute.Path) == ".xaml")
+            .Where(IsDefaultResource)
             .Select(attribute => Activator.CreateInstance(attribute.Type))
             .OfType<ResourceDictionary>();
 
@@ -16,5 +16,14 @@ internal partial class App(IServiceProvider services) : BlazorBindingsApplicatio
         {
             Resources.Add(resource);
         }
+    }
+
+    private static bool IsDefaultResource(XamlResourceIdAttribute attribute)
+    {
+        // Handle differences between windows and other platforms (Eg. Android, IOS, etc.)
+        var directory = Path.GetDirectoryName(attribute.Path)?.Replace("\\", "/");
+        var extension = Path.GetExtension(attribute.Path);
+
+        return directory == "Resources/Styles" && extension == ".xaml";
     }
 }

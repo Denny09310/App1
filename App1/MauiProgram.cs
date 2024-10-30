@@ -3,6 +3,7 @@ using BlazorBindings.Maui;
 using MauiIcons.Material;
 using Microsoft.Extensions.Logging;
 using Refit;
+using The49.Maui.BottomSheet;
 
 namespace App1
 {
@@ -15,6 +16,7 @@ namespace App1
                 .UseMauiApp<App>()
                 .UseMauiBlazorBindings()
                 .UseMaterialMauiIcons()
+                .UseBottomSheet()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
