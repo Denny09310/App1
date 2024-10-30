@@ -1,0 +1,20 @@
+<Border HeightRequest="40" WidthRequest="40" StrokeColor="Colors.Transparent">
+    <StrokeShape>
+        <RoundRectangle CornerRadius="80" />
+    </StrokeShape>
+
+    <ChildContent>
+        <Image Aspect="Aspect.AspectFit"
+               Source="@ImageSource.FromUri(new Uri(User.Image))"
+               HeightRequest="40"
+               WidthRequest="40"
+               VerticalOptions="LayoutOptions.Center"
+               HorizontalOptions="LayoutOptions.Center" />
+    </ChildContent>
+</Border>
+
+@code
+{
+    [Parameter]
+    public User User { get; set; } = default!;
+}

@@ -1,0 +1,44 @@
+@namespace BlazorBindings.Maui.Elements
+
+<VerticalStackLayout @ref="view" OnTap="HandleTapAsync">
+    <Border StrokeColor="@Colors.Black" Padding="@Size" StrokeThickness="2">
+        <StrokeShape>
+            <RoundRectangle CornerRadius="80" />
+        </StrokeShape>
+
+        <ChildContent>
+            <MauiIcon Icon="@Icon" />
+        </ChildContent>
+    </Border>
+
+    <Label HorizontalOptions="LayoutOptions.Center" FontAttributes="FontAttributes.Bold">@Label</Label>
+</VerticalStackLayout>
+
+@code
+{
+    [Parameter]
+    public double Size { get; set; } = 20;
+
+    [Parameter]
+    [EditorRequired]
+    public string? Label { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public MaterialIcons Icon { get; set; }
+
+    [Parameter]
+    public EventCallback<TappedEventArgs> OnTap { get; set; }
+
+    private View view = default!;
+
+    private MC.View NativeControl => view.NativeControl;
+
+    private async Task HandleTapAsync(TappedEventArgs e)
+    {
+        NativeControl.Opacity = 0.0;
+        await NativeControl.FadeTo(1.0);
+
+        await OnTap.InvokeAsync(e);
+    }
+}

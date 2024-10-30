@@ -1,0 +1,22 @@
+@namespace BlazorBindings.Maui.Elements
+
+<BottomSheet HasHandle="true" Padding="new Thickness(15, 20, 15, 0)">
+    <Detents>
+        <FullscreenDetent />
+        <RatioDetent Ratio="0.75f" />
+        <RatioDetent Ratio="0.5f" IsDefault="true" />
+        <RatioDetent Ratio="0.25f" />
+    </Detents>
+    <ChildContent>
+        @Body
+    </ChildContent>
+</BottomSheet>
+
+@code
+{
+    [Parameter]
+    public string? Title { get; set; }
+
+    [Parameter]
+    public RenderFragment Body { get; set; } = default!;
+}

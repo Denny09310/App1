@@ -1,42 +1,28 @@
 @inject IDummyClient Dummy
+@inject INavigation Navigation
 
 <ContentView OnLoaded="HandleLoadedAsync">
     @if (user != null)
     {
-        <StackLayout Padding="16" Spacing="15">
+        <VerticalStackLayout Padding="16" Spacing="15">
 
             <FlexLayout Direction="FlexDirection.Row"
                         HorizontalOptions="LayoutOptions.Fill"
                         AlignItems="FlexAlignItems.Center"
                         JustifyContent="FlexJustify.SpaceBetween">
 
-                <StackLayout Orientation="StackOrientation.Horizontal" Spacing="15">
-
-                    <Border HeightRequest="48" WidthRequest="48" StrokeColor="Colors.Transparent">
-                        <StrokeShape>
-                            <RoundRectangle CornerRadius="new(80, 80, 80, 80)" />
-                        </StrokeShape>
-
-                        <ChildContent>
-                            <Image Aspect="Aspect.AspectFit"
-                                   Source="@ImageSource.FromUri(new Uri(user.Image))"
-                                   HeightRequest="48"
-                                   WidthRequest="48"
-                                   VerticalOptions="LayoutOptions.Center"
-                                   HorizontalOptions="LayoutOptions.Center" />
-                        </ChildContent>
-                    </Border>
-
+                <HorizontalStackLayout Spacing="15">
+                    <AvatarView User="@user" />
                     <Label FontSize="16" Opacity="0.5" VerticalOptions="LayoutOptions.Center">@user.Username</Label>
-                </StackLayout>
+                </HorizontalStackLayout>
 
-                <MauiIcon Icon="@MaterialIcons.MoreVert" OnClickAnimationType="AnimationType.Fade" />
+                <MauiIcon Icon="@MaterialIcons.MoreVert" OnTap="ShowMoreOptionsAsync" />
             </FlexLayout>
 
             <Label FontSize="20" FontAttributes="FontAttributes.Bold">@Post.Title</Label>
             <Label>@Post.Body</Label>
 
-            <StackLayout Orientation="StackOrientation.Horizontal" Spacing="25">
+            <HorizontalStackLayout Spacing="25">
                 <MauiIcon Icon="@MaterialIcons.ThumbUp"
                           IconSize="18"
                           IconSuffixFontSize="18"
@@ -46,8 +32,8 @@
                           IconSize="18"
                           IconSuffixFontSize="18"
                           IconSuffix="@($"{Post.Reactions.Dislikes}")" />
-            </StackLayout>
-        </StackLayout>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
     }
 </ContentView>
 
@@ -65,5 +51,11 @@
         {
             user = response.Content;
         }
+    }
+
+    private async Task ShowMoreOptionsAsync()
+    {
+        var sheet = await Navigation.CreateBottomSheetAsync<MoreOptionsBottomSheet>();
+        await sheet.ShowAsync();
     }
 }
