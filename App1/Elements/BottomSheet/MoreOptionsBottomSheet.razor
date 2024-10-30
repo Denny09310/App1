@@ -1,6 +1,6 @@
 @namespace BlazorBindings.Maui.Elements
 
-<ContentView>
+<ContentView Resources="@Resources">
     <VerticalStackLayout>
         <FlexLayout AlignItems="FlexAlignItems.Center" JustifyContent="FlexJustify.SpaceAround" Padding="new Thickness(0, 40)">
             <RoundedActionButton Icon="MaterialIcons.Bookmark" Label="Save" />
@@ -11,35 +11,20 @@
         <BoxView HeightRequest="1" Color="@Colors.LightGray" />
 
         <Button Icon.Value="@FavouritesIcon"
-                Text="Add to favourite"
-                TextColor="@Colors.Black"
-                BackgroundColor="@Colors.Transparent"
-                HorizontalOptions="LayoutOptions.Start" />
+                Text="Add to favourite" />
 
         <Button Icon.Value="@PersonRemoveIcon"
-                Text="Unfollow"
-                TextColor="@Colors.Black"
-                BackgroundColor="@Colors.Transparent"
-                HorizontalOptions="LayoutOptions.Start" />
+                Text="Unfollow"/>
 
         <BoxView HeightRequest="1" Color="@Colors.LightGray" />
 
         <Button Icon.Value="@HideSourceIcon"
-                Text="Hide this post"
-                TextColor="@Colors.Black"
-                BackgroundColor="@Colors.Transparent"
-                HorizontalOptions="LayoutOptions.Start" />
+                Text="Hide this post"/>
 
         <Button Icon.Value="@InfoOutlineIcon"
-                Text="More about this account"
-                TextColor="@Colors.Black"
-                BackgroundColor="@Colors.Transparent"
-                HorizontalOptions="LayoutOptions.Start" />
+                Text="More about this account" />
 
         <Button Icon.Value="@ReportIcon"
-                Text="Report"
-                TextColor="@Colors.Red"
-                BackgroundColor="@Colors.Transparent"
-                HorizontalOptions="LayoutOptions.Start" />
+                Text="Report" />
     </VerticalStackLayout>
 </ContentView>

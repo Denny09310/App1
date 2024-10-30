@@ -1,6 +1,6 @@
 @namespace BlazorBindings.Maui.Elements
 
-<VerticalStackLayout @ref="view" OnTap="HandleTapAsync">
+<VerticalStackLayout>
     <Border StrokeColor="@Colors.Black" Padding="@Size" StrokeThickness="2">
         <StrokeShape>
             <RoundRectangle CornerRadius="80" />
@@ -29,16 +29,4 @@
 
     [Parameter]
     public EventCallback<TappedEventArgs> OnTap { get; set; }
-
-    private View view = default!;
-
-    private MC.View NativeControl => view.NativeControl;
-
-    private async Task HandleTapAsync(TappedEventArgs e)
-    {
-        NativeControl.Opacity = 0.0;
-        await NativeControl.FadeTo(1.0);
-
-        await OnTap.InvokeAsync(e);
-    }
 }

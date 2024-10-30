@@ -1,37 +1,46 @@
-﻿using MauiIcons.Material;
-using MCB = MauiIcons.Core.Base;
+﻿using MauiIcons.Core.Base;
+using MauiIcons.Material;
+using MC = Microsoft.Maui.Controls;
 
 namespace BlazorBindings.Maui.Elements;
 
 public partial class MoreOptionsBottomSheet
 {
-    private static readonly MCB.BaseIcon FavouritesIcon = new()
+    private static readonly BaseIcon FavouritesIcon = new()
     {
         Icon = MaterialIcons.Favorite,
-        IconColor = Colors.Black,
     };
 
-    private static readonly MCB.BaseIcon PersonRemoveIcon = new()
-    {
-        Icon = MaterialIcons.PersonRemove,
-        IconColor = Colors.Black,
-    };
-
-    private static readonly MCB.BaseIcon HideSourceIcon = new()
+    private static readonly BaseIcon HideSourceIcon = new()
     {
         Icon = MaterialIcons.HideSource,
-        IconColor = Colors.Black,
     };
 
-    private static readonly MCB.BaseIcon InfoOutlineIcon = new()
+    private static readonly BaseIcon InfoOutlineIcon = new()
     {
         Icon = MaterialIcons.InfoOutline,
-        IconColor = Colors.Black,
     };
 
-    private static readonly MCB.BaseIcon ReportIcon = new()
+    private static readonly BaseIcon PersonRemoveIcon = new()
+    {
+        Icon = MaterialIcons.PersonRemove,
+    };
+
+    private static readonly BaseIcon ReportIcon = new()
     {
         Icon = MaterialIcons.Report,
-        IconColor = Colors.Red,
+    };
+
+    private static readonly ResourceDictionary Resources = new()
+    {
+        new Style(typeof(MC.Button))
+        {
+            Setters =
+            {
+                new Setter { Property = MC.View.HorizontalOptionsProperty, Value = LayoutOptions.Start },
+                new Setter { Property = MC.VisualElement.BackgroundColorProperty, Value = Colors.Transparent },
+                new Setter { Property = MC.Button.TextColorProperty, Value = Colors.Black },
+            }
+        }
     };
 }

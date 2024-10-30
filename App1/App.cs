@@ -9,15 +9,15 @@ internal partial class App(IServiceProvider services) : BlazorBindingsApplicatio
 {
     protected override void Configure()
     {
-        InitializeResources();
         ConfigureAttachedProperties();
+        InitializeResources();
     }
 
 #pragma warning disable MBB001 // Type viene usato solo a scopo di valutazione e potrebbe essere modificato o rimosso in aggiornamenti futuri. Elimina questa diagnostica per continuare.
 
     private static void ConfigureAttachedProperties()
     {
-        AttachedPropertyRegistry.RegisterAttachedPropertyHandler("Icon.Value", 
+        AttachedPropertyRegistry.RegisterAttachedPropertyHandler("Icon.Value",
             (sender, e) => MauiIcon.SetValue(sender, (BaseIcon)e));
     }
 
