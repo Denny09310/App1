@@ -426,6 +426,9 @@
     </Style>
 
     <Style TargetType="tmb:BottomSheet">
+        <Setter Property="HasHandle" Value="True" />
+        <Setter Property="HasBackdrop" Value="True" />
+        <Setter Property="Padding" Value="15,20,15,0" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
     </Style>
 

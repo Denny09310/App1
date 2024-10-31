@@ -1,14 +1,21 @@
 @namespace BlazorBindings.Maui.Elements
 
-<BottomSheet Padding="new Thickness(15, 20, 15, 0)" HasHandle="true" HasBackdrop="true">
+<BottomSheet>
     <Detents>
         <FullscreenDetent />
-        <RatioDetent Ratio="0.75f" />
-        <RatioDetent Ratio="0.5f" IsDefault="true" />
-        <RatioDetent Ratio="0.25f" />
+        <MediumDetent Ratio="0.75f" IsDefault="true" />
     </Detents>
     <ChildContent>
-        @Body
+        <VerticalStackLayout Spacing="20">
+            @if (Title != null)
+            {
+                <Label HorizontalOptions="LayoutOptions.Center" FontAttributes="FontAttributes.Bold">
+                    @Title
+                </Label>
+            }
+
+            @Body
+        </VerticalStackLayout>
     </ChildContent>
 </BottomSheet>
 
