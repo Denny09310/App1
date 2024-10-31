@@ -6,7 +6,7 @@ namespace BlazorBindings.Maui.Elements;
 
 public partial class MoreOptionsBottomSheet
 {
-    private static readonly BaseIcon FavouritesIcon = new()
+    private static readonly BaseIcon BookmarkIcon = new()
     {
         Icon = MaterialIcons.Favorite,
     };
@@ -33,8 +33,5 @@ public partial class MoreOptionsBottomSheet
 
     private static readonly ResourceDictionary Resources = [];
 
-    static MoreOptionsBottomSheet()
-    {
-        Resources.Scoped("Elements/BottomSheet/MoreOptionsBottomSheet.razor.xaml");
-    }
+    static MoreOptionsBottomSheet() => Resources.Scoped("Elements/BottomSheet/MoreOptionsBottomSheet.razor.xaml");
 }

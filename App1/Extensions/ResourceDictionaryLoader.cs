@@ -8,7 +8,11 @@ public static class ResourceDictionaryLoader
     {
         var uri = new Uri(resourcePath, UriKind.Relative);
         var assembly = containingAssembly ?? Assembly.GetCallingAssembly();
-        dictionary.SetAndLoadSource(uri, resourcePath, assembly, null);
+        
+        var resource = new ResourceDictionary();
+        resource.SetAndLoadSource(uri, resourcePath, assembly, null);
+
+        dictionary.Add(resource);
         return dictionary;
     }
 }
